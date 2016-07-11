@@ -185,11 +185,24 @@ public class ESEngine
 				
 				String number = line.substring(firstPos, pointer + 1); //be careful of off-by-one
 				
-				//if we don't hit a decimal, it's an int, if we do, it's a float
+				//if we hit a decimal, it's a float, otherwise, it's an int
+				if(number.contains("."))
+				{
+					//TODO datatypes (well all token types really
+					tokens.add(new ESToken(Float.toString(Float.parseFloat(number))));
+				}
+				else
+				{
+					//TODO datatypes (well all token types really
+					tokens.add(new ESToken(Integer.toString(Integer.parseInt(number))));
+				}
 				
-				
-				//do we need this?
+				//do we need this? I think so
 				pointer++;
+			}
+			else if(line.charAt(pointer) == '"')
+			{
+				//character is a quotation mark, must be beginning of a string, continue until we hit a non-escaped quotation mark
 			}
 			else if(Character.isAlphabetic(line.charAt(pointer)))
 			{
