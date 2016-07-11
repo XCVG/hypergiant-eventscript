@@ -42,21 +42,154 @@ public class ESEngine
 		int pointer = 0;
 		while(pointer < line.length())
 		{
+			//always advance the pointer after getting the token
 			if(Character.isWhitespace(line.charAt(pointer)))
 			{
 				//character is whitespace, without context it's meaningless so just keep going
 				pointer++;
 			}
-			else if(line.charAt(pointer) == '=') //does that work in Java
+			else if(line.charAt(pointer) == '$') //does that work in Java
 			{
 				//character is a dollar sign, must be a variable name, continue until we hit something that's not a letter or number
 				
 			}
+			else if("+-*/%=!><&|".indexOf(line.charAt(pointer)) >= 0) //hack suggested by Marc on stackoverflow
+			{
+				//character is an operator or first character of an operator
+				//depending on what it is, we may need to check the next character
+				//
+				char firstChar = line.charAt(pointer);
+				switch(firstChar)
+				{
+				case '+': //+, ++, or +=
+					pointer++;
+					if(line.charAt(pointer) == '+')
+					{
+						tokens.add(new ESToken("++"));
+						pointer++;
+					}
+					else if(line.charAt(pointer) == '=')
+					{
+						tokens.add(new ESToken("+="));
+						pointer++;
+					}
+					else tokens.add(new ESToken("+"));
+					
+					break;
+				case '-': //-, --, or -=
+					pointer++;
+					if(line.charAt(pointer) == '-')
+					{
+						tokens.add(new ESToken("--"));
+						pointer++;
+					}
+					else if(line.charAt(pointer) == '=')
+					{
+						tokens.add(new ESToken("-="));
+						pointer++;
+					}
+					else tokens.add(new ESToken("-"));
+					
+					break;
+				case '*': //* or *=
+					pointer++;
+					if(line.charAt(pointer) == '=')
+					{
+						tokens.add(new ESToken("*="));
+						pointer++;
+					}
+					else tokens.add(new ESToken("*"));
+					
+					break;
+				case '/': // / or /=
+					pointer++;
+					if(line.charAt(pointer) == '=')
+					{
+						tokens.add(new ESToken("/="));
+						pointer++;
+					}
+					else tokens.add(new ESToken("/"));
+					
+					break;
+				case '=': //= or ==
+					pointer++;
+					if(line.charAt(pointer) == '=')
+					{
+						tokens.add(new ESToken("=="));
+						pointer++;
+					}
+					else tokens.add(new ESToken("="));
+					
+					break;
+				case '!': //! or !=
+					pointer++;
+					if(line.charAt(pointer) == '=')
+					{
+						tokens.add(new ESToken("!="));
+						pointer++;
+					}
+					else tokens.add(new ESToken("!"));
+					
+					break;
+				case '>': //> or >=
+					pointer++;
+					if(line.charAt(pointer) == '=')
+					{
+						tokens.add(new ESToken(">="));
+						pointer++;
+					}
+					else tokens.add(new ESToken(">"));
+					
+					break;
+				case '<': //< or <=
+					pointer++;
+					if(line.charAt(pointer) == '=')
+					{
+						tokens.add(new ESToken("<="));
+						pointer++;
+					}
+					else tokens.add(new ESToken("<"));
+					
+					break;
+				case '&': //&&
+					pointer++;
+					if(line.charAt(pointer) == '&')
+					{
+						tokens.add(new ESToken("&&"));
+						pointer++;
+					}
+					else throw new ESUnrecognizedTokenException();
+					
+					break;
+				case '|': //||
+					pointer++;
+					if(line.charAt(pointer) == '|')
+					{
+						tokens.add(new ESToken("||"));
+						pointer++;
+					}
+					else throw new ESUnrecognizedTokenException();
+					
+					break;
+				}
+			}
 			else if(Character.isDigit(line.charAt(pointer)))
 			{
 				//character is a digit, continue until we hit something that's not a digit or decimal, then save the token
+				int firstPos = pointer;
+				
+				do
+				{
+					pointer++;
+				} while(Character.isDigit(line.charAt(pointer)) || line.charAt(pointer) == '.');
+				
+				String number = line.substring(firstPos, pointer + 1); //be careful of off-by-one
 				
 				//if we don't hit a decimal, it's an int, if we do, it's a float
+				
+				
+				//do we need this?
+				pointer++;
 			}
 			else if(Character.isAlphabetic(line.charAt(pointer)))
 			{
@@ -70,7 +203,7 @@ public class ESEngine
 			else
 			{
 				//character is not recognizable, we broke something
-				throw new ESInternalException();
+				throw new ESUnrecognizedTokenException();
 			}
 			//curlybraces shouldn't happen because the script tokenizer should handle those
 		}
