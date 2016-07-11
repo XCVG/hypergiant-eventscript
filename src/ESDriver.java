@@ -1,3 +1,4 @@
+import com.xcvgsystems.hypergiant.eventscript.*;
 
 public class ESDriver
 {
@@ -6,6 +7,10 @@ public class ESDriver
 	{
 		// TODO Auto-generated method stub
 		System.out.println("Hello world!");
+		
+		ESEngine engine = new ESEngine();
+		System.out.println(engine.tokenizeLine("6 + 4 * 2"));
+		System.out.println(engine.tokenizeLine("6+4*2"));
 	}
 
 }

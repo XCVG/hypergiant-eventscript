@@ -35,11 +35,48 @@ public class ESEngine
 	 * @param line The raw line of code.
 	 * @return A list of tokens representing the line of code.
 	 */
-	private List<ESToken> tokenizeLine (String line)
+	public List<ESToken> tokenizeLine (String line)
 	{
+		List<ESToken> tokens = new LinkedList<>();
+		
+		int pointer = 0;
+		while(pointer < line.length())
+		{
+			if(Character.isWhitespace(line.charAt(pointer)))
+			{
+				//character is whitespace, without context it's meaningless so just keep going
+				pointer++;
+			}
+			else if(line.charAt(pointer) == '=') //does that work in Java
+			{
+				//character is a dollar sign, must be a variable name, continue until we hit something that's not a letter or number
+				
+			}
+			else if(Character.isDigit(line.charAt(pointer)))
+			{
+				//character is a digit, continue until we hit something that's not a digit or decimal, then save the token
+				
+				//if we don't hit a decimal, it's an int, if we do, it's a float
+			}
+			else if(Character.isAlphabetic(line.charAt(pointer)))
+			{
+				//character is a letter, must be a function call, continue until we hit whitespace or a bracket
+			}
+			else if(line.charAt(pointer) == '(')
+			{
+				//character is a bracket, must be the beginning of a sub-expression or explicit cast
+				//count brackets and make it to the closing brace, then try to figure out what it is
+			}
+			else
+			{
+				//character is not recognizable, we broke something
+				throw new ESInternalException();
+			}
+			//curlybraces shouldn't happen because the script tokenizer should handle those
+		}
 		
 		
-		return null;
+		return tokens;
 	}
 
 }
