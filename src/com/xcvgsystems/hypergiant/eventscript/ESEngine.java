@@ -48,10 +48,19 @@ public class ESEngine
 				//character is whitespace, without context it's meaningless so just keep going
 				pointer++;
 			}
-			else if(line.charAt(pointer) == '$') //does that work in Java
+			else if(line.charAt(pointer) == '$') //does that work in Java?
 			{
 				//character is a dollar sign, must be a variable name, continue until we hit something that's not a letter or number
+				int firstPos = pointer;
 				
+				do
+				{
+					pointer++;
+				} while(Character.isLetterOrDigit(line.charAt(pointer)));
+				
+				String varname = line.substring(firstPos+1, pointer + 1); //be careful of off-by-one, but the first one removes the $
+				
+				tokens.add(new ESToken(varname));
 			}
 			else if("+-*/%=!><&|".indexOf(line.charAt(pointer)) >= 0) //hack suggested by Marc on stackoverflow
 			{
