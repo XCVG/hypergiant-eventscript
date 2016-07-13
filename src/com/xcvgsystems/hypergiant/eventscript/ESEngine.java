@@ -192,17 +192,17 @@ public class ESEngine
 					pointer++;
 				} while(Character.isDigit(line.charAt(pointer)) || line.charAt(pointer) == '.');
 				
-				String number = line.substring(firstPos, pointer + 1); //be careful of off-by-one
+				String number = line.substring(firstPos, pointer); //be careful of off-by-one
 				
 				//if we hit a decimal, it's a float, otherwise, it's an int
 				if(number.contains("."))
 				{
-					//TODO datatypes (well all token types really
+					//TODO datatypes (well all token types really)
 					tokens.add(new ESToken(Float.toString(Float.parseFloat(number))));
 				}
 				else
 				{
-					//TODO datatypes (well all token types really
+					//TODO datatypes (well all token types really)
 					tokens.add(new ESToken(Integer.toString(Integer.parseInt(number))));
 				}
 				
@@ -212,15 +212,53 @@ public class ESEngine
 			else if(line.charAt(pointer) == '"')
 			{
 				//character is a quotation mark, must be beginning of a string, continue until we hit a non-escaped quotation mark
+				int firstPos = pointer;
+				
+				do
+				{
+					pointer++;
+				} while(!(line.charAt(pointer) == '"' && line.charAt(pointer-1) != '\\'));
+				
+				String str = line.substring(firstPos+1,pointer); //we only want the string itself
+				
+				tokens.add(new ESToken(str));
 			}
 			else if(Character.isAlphabetic(line.charAt(pointer)))
 			{
 				//character is a letter, must be a function call, continue until we hit whitespace or a bracket
+				int firstPos = pointer;
+				
+				do
+				{
+					pointer++;
+				} while(!(Character.isWhitespace(line.charAt(pointer)) || line.charAt(pointer) == '(' )); //I hope this is right
+				
+				String function = line.substring(firstPos,pointer+1);
+				
+				tokens.add(new ESToken(function));
 			}
 			else if(line.charAt(pointer) == '(')
 			{
 				//character is a bracket, must be the beginning of a sub-expression or explicit cast
 				//count brackets and make it to the closing brace, then try to figure out what it is
+				int firstPos = pointer;
+				int bracketCount = 1; //we have the opening bracket only
+				do
+				{
+					pointer++;
+					if(line.charAt(pointer) == '(')
+					{
+						bracketCount++; //another opening bracket
+					}
+					else if(line.charAt(pointer) == ')')
+					{
+						bracketCount--; //a matching closing bracket
+					}
+				} while(bracketCount > 1);
+				
+				String subexpr = line.substring(firstPos+1,pointer); //we want everything inside the brackets
+				
+				tokens.add(new ESToken(subexpr)); //TODO needs to be ESExpression
 			}
 			else
 			{
