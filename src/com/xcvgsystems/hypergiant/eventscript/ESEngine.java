@@ -37,6 +37,8 @@ public class ESEngine
 	 */
 	public List<ESToken> tokenizeLine (String line)
 	{
+		line = line.concat(" "); //a gross hack instead of adding null checks.
+		
 		List<ESToken> tokens = new LinkedList<>();
 		
 		int pointer = 0;
@@ -58,7 +60,7 @@ public class ESEngine
 					pointer++;
 				} while(Character.isLetterOrDigit(line.charAt(pointer)));
 				
-				String varname = line.substring(firstPos+1, pointer + 1); //be careful of off-by-one, but the first one removes the $
+				String varname = line.substring(firstPos+1, pointer); //be careful of off-by-one, but the first one removes the $
 				
 				tokens.add(new ESToken(varname));
 			}
@@ -206,10 +208,10 @@ public class ESEngine
 					tokens.add(new ESToken(Integer.toString(Integer.parseInt(number))));
 				}
 				
-				//do we need this? I think so
-				pointer++;
+				//DO NOT ADVANCE, we've landed after the number already
+				//pointer++;
 			}
-			else if(line.charAt(pointer) == '"')
+			else if(line.charAt(pointer) == '"') //this might be iffy, keep an eye on it
 			{
 				//character is a quotation mark, must be beginning of a string, continue until we hit a non-escaped quotation mark
 				int firstPos = pointer;
@@ -222,6 +224,8 @@ public class ESEngine
 				String str = line.substring(firstPos+1,pointer); //we only want the string itself
 				
 				tokens.add(new ESToken(str));
+				
+				pointer++; //again, we've landed on the ending quotation mark, not the one after
 			}
 			else if(Character.isAlphabetic(line.charAt(pointer)))
 			{
@@ -233,7 +237,7 @@ public class ESEngine
 					pointer++;
 				} while(!(Character.isWhitespace(line.charAt(pointer)) || line.charAt(pointer) == '(' )); //I hope this is right
 				
-				String function = line.substring(firstPos,pointer+1);
+				String function = line.substring(firstPos,pointer);
 				
 				tokens.add(new ESToken(function));
 			}
@@ -254,11 +258,13 @@ public class ESEngine
 					{
 						bracketCount--; //a matching closing bracket
 					}
-				} while(bracketCount > 1);
+				} while(bracketCount > 0);
 				
 				String subexpr = line.substring(firstPos+1,pointer); //we want everything inside the brackets
 				
 				tokens.add(new ESToken(subexpr)); //TODO needs to be ESExpression
+				
+				pointer++; //advance the pointer when we're done with the expression because we landed ON the end, not AFTER it
 			}
 			else
 			{

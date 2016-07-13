@@ -9,8 +9,13 @@ public class ESDriver
 		System.out.println("Hello world!");
 		
 		ESEngine engine = new ESEngine();
+		System.out.println(engine.tokenizeLine("$variable++"));
 		System.out.println(engine.tokenizeLine("6 + 4 * 2"));
+		System.out.println(engine.tokenizeLine("++5"));
+		System.out.println(engine.tokenizeLine("5++"));
 		System.out.println(engine.tokenizeLine("6+4*2"));
+		System.out.println(engine.tokenizeLine("6 + 4 * build(2+3+5)"));
+		System.out.println(engine.tokenizeLine("\"Hello!\""));
 	}
 
 }
