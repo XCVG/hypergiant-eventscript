@@ -122,6 +122,16 @@ public class ESEngine
 					else tokens.add(new ESToken("/"));
 					
 					break;
+				case '%': // % or %=
+					pointer++;
+					if(line.charAt(pointer) == '=')
+					{
+						tokens.add(new ESToken("%="));
+						pointer++;
+					}
+					else tokens.add(new ESToken("%"));
+					
+					break;
 				case '=': //= or ==
 					pointer++;
 					if(line.charAt(pointer) == '=')

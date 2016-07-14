@@ -13,8 +13,9 @@ public class ESDriver
 		System.out.println(engine.tokenizeLine("6 + 4 * 2"));
 		System.out.println(engine.tokenizeLine("++5"));
 		System.out.println(engine.tokenizeLine("5++"));
+		System.out.println(engine.tokenizeLine("56.27283 + 177772823 - 1 % 3"));
 		System.out.println(engine.tokenizeLine("6+4*2"));
-		System.out.println(engine.tokenizeLine("6 + 4 * build(2+3+5)"));
+		System.out.println(engine.tokenizeLine("6 + 4 * build((2+3)*5)"));
 		System.out.println(engine.tokenizeLine("\"Hello!\""));
 	}
 
