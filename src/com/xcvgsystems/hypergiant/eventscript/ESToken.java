@@ -11,6 +11,11 @@ public class ESToken
 {
 	private String symbol;
 
+	public ESToken()
+	{
+		symbol = null;
+	}
+	
 	public ESToken(String symbol)
 	{
 		this.symbol = symbol;
