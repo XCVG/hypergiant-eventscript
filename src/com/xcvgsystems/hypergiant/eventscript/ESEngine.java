@@ -58,7 +58,7 @@ public class ESEngine
 				do
 				{
 					pointer++;
-				} while(Character.isLetterOrDigit(line.charAt(pointer)));
+				} while(Character.isLetterOrDigit(line.charAt(pointer)) || line.charAt(pointer) == '_');
 				
 				String varname = line.substring(firstPos+1, pointer); //be careful of off-by-one, but the first one removes the $
 				
