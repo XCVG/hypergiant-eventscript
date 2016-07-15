@@ -1,7 +1,5 @@
 package com.xcvgsystems.hypergiant.eventscript;
 
-import com.xcvgsystems.hypergiant.eventscript.ESVariable.ESVariableType;
-
 /**
  * A literal value. Currently immutable. May separate into separate wrappers.
  * 
@@ -38,25 +36,9 @@ public class ESValue extends ESToken
 	/**
 	 * @return this value's data type
 	 */
-	public ESVariableType getType()
+	public ESDataType getType()
 	{
-		if(value instanceof Integer)
-		{
-			return ESVariableType.INTEGER;
-		}
-		else if (value instanceof Float)
-		{
-			return ESVariableType.FLOAT;
-		}
-		else if (value instanceof String)
-		{
-			return ESVariableType.STRING;
-		}
-		else if(value instanceof Boolean)
-		{
-			return ESVariableType.BOOLEAN;
-		}
-		else throw new ESCastException(); //TODO change to ESDataTypeException
+		return ESDataType.getTypeForObject(value);
 	}
 
 }
