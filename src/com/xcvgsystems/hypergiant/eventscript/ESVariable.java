@@ -8,12 +8,13 @@ package com.xcvgsystems.hypergiant.eventscript;
  */
 public class ESVariable extends ESToken
 {
-	protected enum ESVariableType {
+	protected enum ESVariableType { //should probably move that
+		//should we add a specific "UNTYPED" type?
 		BOOLEAN, INTEGER, FLOAT, STRING
 	}
 
 	private Object value;
-	private ESVariableType type;
+	private ESVariableType type; 
 	
 	/**
 	 * Creates an empty variable.
@@ -105,14 +106,35 @@ public class ESVariable extends ESToken
 		
 		this.value = value;
 	}
-	
+		
+	/**
+	 * Get this variable's type
+	 * @return this variable's type
+	 */
+	public ESVariableType getType()
+	{
+		return type;
+	}
 	
 	/**
+	 * @param input the object to check
+	 * @return if the type is allowable under EventScript's type system
+	 */
+	static boolean isTypeAllowable(Object input)
+	{
+		return (input instanceof Boolean || input instanceof Integer || input instanceof Float || input instanceof String);
+	}
+
+	/**
 	 * @param input the value coming in
-	 * @return if the new value can be IMPLICITLY cast
+	 * @return if the new value can be IMPLICITLY cast to the current type
 	 */
 	private boolean isTypeCastable(Object input)
 	{
+		//this variable is not strongly typed, so don't bother checking
+		if(this.type == null)
+			return true;
+		
 		// TODO figure out some implicit casting rules
 		return false;
 	}
@@ -123,8 +145,7 @@ public class ESVariable extends ESToken
 	 */
 	private boolean isTypeMatching(Object input)
 	{
-		//this variable is not strongly type, let it store whatever
-		//should we check for truly invalid types though?
+		//this variable is not strongly typed, let it store whatever
 		if(this.type == null)
 			return true;
 		
