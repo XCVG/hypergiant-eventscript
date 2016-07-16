@@ -33,6 +33,7 @@ enum ESDataType
 	 * @param dest the destination type
 	 * @return whether source can be cast to destination
 	 */
+	/*
 	static boolean isTypeCastable(Object source, ESDataType dest)
 	{
 		//if it's not a recognized type, toss it
@@ -41,6 +42,8 @@ enum ESDataType
 		
 		throw new RuntimeException(); //TODO not implemented
 	}
+	*/
+	//pointless but may rework into "is variable castable" ie checking if a cast will be successful
 	
 	/**
 	 * Cast from one data type to another using EventScript rules
@@ -50,7 +53,96 @@ enum ESDataType
 	 */
 	static Object castValue(Object source, ESDataType type)
 	{
+		//is this the behaviour we want?
+		if(source == null)
+			throw new ESCastException();
 		
+		ESDataType sourcetype = getTypeForObject(source);
+		
+		//easy
+		if(sourcetype == type)
+			return source;
+		
+		switch(sourcetype) //switch on the source datatype
+		{
+		case BOOLEAN:
+			Boolean boolsrc = (Boolean)source;			
+			switch(type)
+			{
+			case FLOAT:
+				return (boolsrc ? new Float(1) : new Float(0));
+			case INTEGER:
+				return (boolsrc ? new Integer(1) : new Integer(0));
+			case STRING:
+				return (boolsrc ? new String("true") : new String("false"));
+			default:
+				break;			
+			}
+			break;
+		case FLOAT:
+			Float floatsrc = (Float)source;
+			switch(type)
+			{
+			case BOOLEAN:
+				return new Boolean((int)floatsrc.floatValue() == 0 ? false : true);
+			case INTEGER:
+				return new Integer((int)floatsrc.floatValue());
+			case STRING:
+				return floatsrc.toString();
+			default:
+				break;			
+			}
+			break;
+		case INTEGER:
+			Integer intsrc = (Integer)source;
+			switch(type)
+			{
+			case BOOLEAN:
+				return new Boolean(intsrc == 0 ? false : true);
+			case FLOAT:
+				return new Float(intsrc);
+			case STRING:
+				return intsrc.toString();
+			default:
+				break;			
+			}
+			break;
+		case STRING:
+			String stringsrc = (String)source;
+			switch(type)
+			{
+			case BOOLEAN:
+				if(stringsrc.trim().equalsIgnoreCase("true") || stringsrc.trim().equals("1"))
+					return new Boolean(true);
+				if(stringsrc.trim().equalsIgnoreCase("false") || stringsrc.trim().equals("0"))
+					return new Boolean(false);
+				throw new ESCastException();
+			case FLOAT:
+				try
+				{
+					return new Float(Float.parseFloat(stringsrc)); //is this safe?
+				}
+				catch(NumberFormatException e)
+				{
+					throw new ESCastException();
+				}
+			case INTEGER:
+				try
+				{
+					return new Integer(Integer.parseInt(stringsrc)); //is this safe?
+				}
+				catch(NumberFormatException e)
+				{
+					throw new ESCastException();
+				}
+			default:
+				break;			
+			}
+			break;
+		default:
+			break;
+		}
+		throw new ESCastException();
 	}
 	
 	/**
