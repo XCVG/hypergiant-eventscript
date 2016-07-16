@@ -250,6 +250,8 @@ public class ESEngine
 				String function = line.substring(firstPos,pointer);
 				
 				tokens.add(new ESToken(function));
+				
+				//TODO it could be a true or false literal as well
 			}
 			else if(line.charAt(pointer) == '(')
 			{

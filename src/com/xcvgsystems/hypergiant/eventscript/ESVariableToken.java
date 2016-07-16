@@ -2,7 +2,7 @@ package com.xcvgsystems.hypergiant.eventscript;
 
 /**
  * A variable token. Stores the variable's name which will be looked up in a dictionary/hashtable/map.
- * May change the way variables work once we get to executing statements.
+ * May change the way variables work once we get to executing statements. Should this reference a variable directly?
  * 
  * @author Chris
  *

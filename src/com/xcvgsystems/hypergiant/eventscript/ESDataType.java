@@ -43,6 +43,17 @@ enum ESDataType
 	}
 	
 	/**
+	 * Cast from one data type to another using EventScript rules
+	 * @param source the source object
+	 * @param type the type to cast to
+	 * @return the cast value in the intended data type
+	 */
+	static Object castValue(Object source, ESDataType type)
+	{
+		
+	}
+	
+	/**
 	 * Check if an object exactly matches the destination type.
 	 * @param object the object to check
 	 * @param type the desired data type

@@ -53,11 +53,10 @@ public class ESVariable
 	{
 		super();
 		
-		//do we want to allow implicit casting here?
 		this.type = type;
 		if(ESDataType.isTypeMatching(value, type))
 			this.value = value;
-		else throw new ESCastException();
+		else throw new ESDataTypeException();
 	}
 	
 	/**
@@ -68,6 +67,7 @@ public class ESVariable
 	public ESVariable(Object value, boolean inferType)
 	{
 		super();
+		
 		if(inferType)
 		{
 			this.type = ESDataType.getTypeForObject(value);
@@ -103,15 +103,8 @@ public class ESVariable
 		{
 			this.value = value;
 		}
-		else
-		{
-			//if it's castable, assign it
-			if(ESDataType.isTypeCastable(value, this.type))
-			{
-				this.value = value;
-			}
-			else throw new ESCastException(); //otherwise give up
-		}
+		else throw new ESDataTypeException(); //otherwise give up
+
 		
 	}
 		
