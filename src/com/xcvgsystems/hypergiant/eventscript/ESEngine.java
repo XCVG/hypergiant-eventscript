@@ -249,9 +249,23 @@ public class ESEngine
 				
 				String function = line.substring(firstPos,pointer);
 				
-				tokens.add(new ESToken(function));
-				
-				//TODO it could be a true or false literal as well
+				//handle named literals
+				if(function.equalsIgnoreCase("true"))
+				{
+					tokens.add(new ESToken("TRUE"));
+				}
+				else if(function.equalsIgnoreCase("false"))
+				{
+					tokens.add(new ESToken("FALSE"));
+				}
+				else if(function.equalsIgnoreCase("null"))
+				{
+					tokens.add(new ESToken("NULL"));
+				}
+				else
+				{
+					tokens.add(new ESToken(function));
+				}				
 			}
 			else if(line.charAt(pointer) == '(')
 			{
