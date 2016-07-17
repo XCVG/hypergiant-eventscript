@@ -1,5 +1,7 @@
 package com.xcvgsystems.hypergiant.eventscript;
 
+import java.util.*;
+
 /**
  * An EventScript script object.
  * 
@@ -8,5 +10,5 @@ package com.xcvgsystems.hypergiant.eventscript;
  */
 public class ESScript
 {
-	//TODO: store state, actual script, etc here
+	List<ESStatement> listscript;
 }
