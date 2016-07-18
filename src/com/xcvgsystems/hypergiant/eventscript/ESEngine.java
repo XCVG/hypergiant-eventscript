@@ -62,7 +62,7 @@ public class ESEngine
 				
 				String varname = line.substring(firstPos+1, pointer); //be careful of off-by-one, but the first one removes the $
 				
-				tokens.add(new ESToken(varname));
+				tokens.add(new ESVariableToken(varname));
 			}
 			else if("+-*/%=!><&|".indexOf(line.charAt(pointer)) >= 0) //hack suggested by Marc on stackoverflow
 			{
@@ -210,12 +210,12 @@ public class ESEngine
 				if(number.contains("."))
 				{
 					//TODO datatypes (well all token types really)
-					tokens.add(new ESToken(Float.toString(Float.parseFloat(number))));
+					tokens.add(new ESValue(Float.parseFloat(number)));
 				}
 				else
 				{
 					//TODO datatypes (well all token types really)
-					tokens.add(new ESToken(Integer.toString(Integer.parseInt(number))));
+					tokens.add(new ESValue(Integer.parseInt(number)));
 				}
 				
 				//DO NOT ADVANCE, we've landed after the number already
@@ -288,7 +288,7 @@ public class ESEngine
 				
 				String subexpr = line.substring(firstPos+1,pointer); //we want everything inside the brackets
 				
-				tokens.add(new ESToken(subexpr)); //TODO needs to be ESExpression
+				tokens.add(new ESExpression(subexpr)); //TODO needs to be ESExpression
 				
 				pointer++; //advance the pointer when we're done with the expression because we landed ON the end, not AFTER it
 			}
