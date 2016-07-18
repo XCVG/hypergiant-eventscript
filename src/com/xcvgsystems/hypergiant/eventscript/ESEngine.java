@@ -233,7 +233,7 @@ public class ESEngine
 				
 				String str = line.substring(firstPos+1,pointer); //we only want the string itself
 				
-				tokens.add(new ESToken(str));
+				tokens.add(new ESValue(new String(str)));
 				
 				pointer++; //again, we've landed on the ending quotation mark, not the one after
 			}
@@ -252,19 +252,19 @@ public class ESEngine
 				//handle named literals
 				if(function.equalsIgnoreCase("true"))
 				{
-					tokens.add(new ESToken("TRUE"));
+					tokens.add(new ESValue(new Boolean(true)));
 				}
 				else if(function.equalsIgnoreCase("false"))
 				{
-					tokens.add(new ESToken("FALSE"));
+					tokens.add(new ESValue(new Boolean(false)));
 				}
 				else if(function.equalsIgnoreCase("null"))
 				{
-					tokens.add(new ESToken("NULL"));
+					tokens.add(new ESValue(null)); //currently this won't work so we're going to have to rethink how nulls are handled 
 				}
 				else
 				{
-					tokens.add(new ESToken(function));
+					tokens.add(new ESCall(function));
 				}				
 			}
 			else if(line.charAt(pointer) == '(')
