@@ -76,15 +76,15 @@ public class ESEngine
 					pointer++;
 					if(line.charAt(pointer) == '+')
 					{
-						tokens.add(new ESIncrementOperator("++"));
+						tokens.add(new ESIncrementOperator());
 						pointer++;
 					}
 					else if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESAdditionAssignmentOperator("+="));
+						tokens.add(new ESAdditionAssignmentOperator());
 						pointer++;
 					}
-					else tokens.add(new ESAdditionOperator("+"));
+					else tokens.add(new ESAdditionOperator());
 					
 					break;
 				case '-': //-, --, or -=
