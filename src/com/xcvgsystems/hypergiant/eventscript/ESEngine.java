@@ -76,107 +76,107 @@ public class ESEngine
 					pointer++;
 					if(line.charAt(pointer) == '+')
 					{
-						tokens.add(new ESToken("++"));
+						tokens.add(new ESIncrementOperator("++"));
 						pointer++;
 					}
 					else if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESToken("+="));
+						tokens.add(new ESAdditionAssignmentOperator("+="));
 						pointer++;
 					}
-					else tokens.add(new ESToken("+"));
+					else tokens.add(new ESAdditionOperator("+"));
 					
 					break;
 				case '-': //-, --, or -=
 					pointer++;
 					if(line.charAt(pointer) == '-')
 					{
-						tokens.add(new ESToken("--"));
+						tokens.add(new ESDecrementOperator("--"));
 						pointer++;
 					}
 					else if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESToken("-="));
+						tokens.add(new ESSubtractionAssignmentOperator("-="));
 						pointer++;
 					}
-					else tokens.add(new ESToken("-"));
+					else tokens.add(new ESSubtractionOperator("-"));
 					
 					break;
 				case '*': //* or *=
 					pointer++;
 					if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESToken("*="));
+						tokens.add(new ESMultiplicationAssignmentOperator("*="));
 						pointer++;
 					}
-					else tokens.add(new ESToken("*"));
+					else tokens.add(new ESMultiplicationOperator("*"));
 					
 					break;
 				case '/': // / or /=
 					pointer++;
 					if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESToken("/="));
+						tokens.add(new ESDivisionAssignmentOperator("/="));
 						pointer++;
 					}
-					else tokens.add(new ESToken("/"));
+					else tokens.add(new ESDivisionOperator("/"));
 					
 					break;
 				case '%': // % or %=
 					pointer++;
 					if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESToken("%="));
+						tokens.add(new ESModulusAssignmentOperator("%="));
 						pointer++;
 					}
-					else tokens.add(new ESToken("%"));
+					else tokens.add(new ESModulusOperator("%"));
 					
 					break;
 				case '=': //= or ==
 					pointer++;
 					if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESToken("=="));
+						tokens.add(new ESEqualityOperator("=="));
 						pointer++;
 					}
-					else tokens.add(new ESToken("="));
+					else tokens.add(new ESAssignmentOperator("="));
 					
 					break;
 				case '!': //! or !=
 					pointer++;
 					if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESToken("!="));
+						tokens.add(new ESInequalityOperator("!="));
 						pointer++;
 					}
-					else tokens.add(new ESToken("!"));
+					else tokens.add(new ESNotOperator("!"));
 					
 					break;
 				case '>': //> or >=
 					pointer++;
 					if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESToken(">="));
+						tokens.add(new ESGreaterThanEqualityOperator(">="));
 						pointer++;
 					}
-					else tokens.add(new ESToken(">"));
+					else tokens.add(new ESGreaterThanOperator(">"));
 					
 					break;
 				case '<': //< or <=
 					pointer++;
 					if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESToken("<="));
+						tokens.add(new ESLesserThanEqualityOperator("<="));
 						pointer++;
 					}
-					else tokens.add(new ESToken("<"));
+					else tokens.add(new ESLesserThanOperator("<"));
 					
 					break;
 				case '&': //&&
 					pointer++;
 					if(line.charAt(pointer) == '&')
 					{
-						tokens.add(new ESToken("&&"));
+						tokens.add(new ESAndOperator("&&"));
 						pointer++;
 					}
 					else throw new ESUnrecognizedTokenException();
@@ -186,7 +186,7 @@ public class ESEngine
 					pointer++;
 					if(line.charAt(pointer) == '|')
 					{
-						tokens.add(new ESToken("||"));
+						tokens.add(new ESOrOperator("||"));
 						pointer++;
 					}
 					else throw new ESUnrecognizedTokenException();
