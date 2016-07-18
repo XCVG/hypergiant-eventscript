@@ -209,12 +209,10 @@ public class ESEngine
 				//if we hit a decimal, it's a float, otherwise, it's an int
 				if(number.contains("."))
 				{
-					//TODO datatypes (well all token types really)
 					tokens.add(new ESValue(Float.parseFloat(number)));
 				}
 				else
 				{
-					//TODO datatypes (well all token types really)
 					tokens.add(new ESValue(Integer.parseInt(number)));
 				}
 				
@@ -262,7 +260,7 @@ public class ESEngine
 				{
 					tokens.add(new ESValue(null)); //currently this won't work so we're going to have to rethink how nulls are handled 
 				}
-				else
+				else //handle function calls
 				{
 					tokens.add(new ESCall(function));
 				}				
@@ -288,7 +286,8 @@ public class ESEngine
 				
 				String subexpr = line.substring(firstPos+1,pointer); //we want everything inside the brackets
 				
-				tokens.add(new ESExpression(subexpr)); //TODO needs to be ESExpression
+				//add the subexpression
+				tokens.add(new ESExpression(subexpr));
 				
 				pointer++; //advance the pointer when we're done with the expression because we landed ON the end, not AFTER it
 			}
