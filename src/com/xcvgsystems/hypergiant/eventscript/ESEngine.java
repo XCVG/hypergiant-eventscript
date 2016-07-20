@@ -91,12 +91,12 @@ public class ESEngine
 					pointer++;
 					if(line.charAt(pointer) == '-')
 					{
-						tokens.add(new ESDecrementOperator("--"));
+						tokens.add(new ESDecrementOperator());
 						pointer++;
 					}
 					else if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESSubtractionAssignmentOperator("-="));
+						tokens.add(new ESSubtractionAssignmentOperator());
 						pointer++;
 					}
 					else tokens.add(new ESSubtractionOperator("-"));
