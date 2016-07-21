@@ -15,12 +15,7 @@ public class ESMultiplicationOperator extends ESOperator implements ESBinaryOper
 		ESDataType arg1type = arg1.getType();
 		Object arg0value = arg0.getValue();
 		Object arg1value = arg1.getValue();
-		
-		//should we attempt a cast here?
-		if(arg0type == ESDataType.STRING && arg1type == ESDataType.STRING)
-		{
-			throw new ESDataTypeException();
-		}
+
 		//if both are booleans, cast to Integer, multiply, return Integer
 		if(arg0type == ESDataType.BOOLEAN && arg1type == ESDataType.BOOLEAN)
 		{

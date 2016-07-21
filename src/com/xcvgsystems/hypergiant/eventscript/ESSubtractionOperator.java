@@ -15,12 +15,7 @@ public class ESSubtractionOperator extends ESOperator implements ESBinaryOperato
 		ESDataType arg1type = arg1.getType();
 		Object arg0value = arg0.getValue();
 		Object arg1value = arg1.getValue();
-		
-		//if both are strings, we can't anticoncatenate (not in EventScript anyway)
-		if(arg0type == ESDataType.STRING && arg1type == ESDataType.STRING)
-		{
-			throw new ESDataTypeException();
-		}
+
 		//if both are booleans, cast to Integer, subtract, return Integer
 		if(arg0type == ESDataType.BOOLEAN && arg1type == ESDataType.BOOLEAN)
 		{

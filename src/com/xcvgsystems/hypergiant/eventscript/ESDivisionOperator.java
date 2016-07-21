@@ -16,12 +16,6 @@ public class ESDivisionOperator extends ESOperator implements ESBinaryOperator
 		Object arg0value = arg0.getValue();
 		Object arg1value = arg1.getValue();
 		
-		//if both are strings, we can't divide them (not in EventScript anyway)
-		//but see the comment in the multiplication operator class about casting that should be possible but isn't
-		if(arg0type == ESDataType.STRING && arg1type == ESDataType.STRING)
-		{
-			throw new ESDataTypeException();
-		}
 		//if both are booleans, cast to Integer, divide, return Integer
 		if(arg0type == ESDataType.BOOLEAN && arg1type == ESDataType.BOOLEAN)
 		{
