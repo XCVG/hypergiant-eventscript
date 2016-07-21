@@ -99,37 +99,37 @@ public class ESEngine
 						tokens.add(new ESSubtractionAssignmentOperator());
 						pointer++;
 					}
-					else tokens.add(new ESSubtractionOperator("-"));
+					else tokens.add(new ESSubtractionOperator());
 					
 					break;
 				case '*': //* or *=
 					pointer++;
 					if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESMultiplicationAssignmentOperator("*="));
+						tokens.add(new ESMultiplicationAssignmentOperator());
 						pointer++;
 					}
-					else tokens.add(new ESMultiplicationOperator("*"));
+					else tokens.add(new ESMultiplicationOperator());
 					
 					break;
 				case '/': // / or /=
 					pointer++;
 					if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESDivisionAssignmentOperator("/="));
+						tokens.add(new ESDivisionAssignmentOperator());
 						pointer++;
 					}
-					else tokens.add(new ESDivisionOperator("/"));
+					else tokens.add(new ESDivisionOperator());
 					
 					break;
 				case '%': // % or %=
 					pointer++;
 					if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESModulusAssignmentOperator("%="));
+						tokens.add(new ESModulusAssignmentOperator());
 						pointer++;
 					}
-					else tokens.add(new ESModulusOperator("%"));
+					else tokens.add(new ESModulusOperator());
 					
 					break;
 				case '=': //= or ==
