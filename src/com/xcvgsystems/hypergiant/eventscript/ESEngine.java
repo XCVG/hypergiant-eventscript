@@ -156,20 +156,20 @@ public class ESEngine
 					pointer++;
 					if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESGreaterThanEqualityOperator(">="));
+						tokens.add(new ESGreaterThanEqualityOperator());
 						pointer++;
 					}
-					else tokens.add(new ESGreaterThanOperator(">"));
+					else tokens.add(new ESGreaterThanOperator());
 					
 					break;
 				case '<': //< or <=
 					pointer++;
 					if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESLesserThanEqualityOperator("<="));
+						tokens.add(new ESLesserThanEqualityOperator());
 						pointer++;
 					}
-					else tokens.add(new ESLesserThanOperator("<"));
+					else tokens.add(new ESLesserThanOperator());
 					
 					break;
 				case '&': //&&
@@ -285,6 +285,8 @@ public class ESEngine
 				} while(bracketCount > 0);
 				
 				String subexpr = line.substring(firstPos+1,pointer); //we want everything inside the brackets
+				
+				//TODO support explicit casts
 				
 				//add the subexpression
 				tokens.add(new ESExpression(subexpr));
