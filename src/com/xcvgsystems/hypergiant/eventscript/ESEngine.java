@@ -136,7 +136,7 @@ public class ESEngine
 					pointer++;
 					if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESEqualityOperator("=="));
+						tokens.add(new ESEqualityOperator());
 						pointer++;
 					}
 					else tokens.add(new ESAssignmentOperator("="));
