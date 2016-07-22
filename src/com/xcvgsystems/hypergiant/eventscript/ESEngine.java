@@ -286,10 +286,29 @@ public class ESEngine
 				
 				String subexpr = line.substring(firstPos+1,pointer); //we want everything inside the brackets
 				
-				//TODO support explicit casts
-				
-				//add the subexpression
-				tokens.add(new ESExpression(subexpr));
+				//support explicit casts
+				if(subexpr.equalsIgnoreCase("bool"))
+				{
+					tokens.add(new ESCastOperator(ESDataType.BOOLEAN));
+				}
+				else if(subexpr.equalsIgnoreCase("int"))
+				{
+					tokens.add(new ESCastOperator(ESDataType.INTEGER));
+				}
+				else if(subexpr.equalsIgnoreCase("float"))
+				{
+					tokens.add(new ESCastOperator(ESDataType.FLOAT));
+				}
+				else if(subexpr.equalsIgnoreCase("string"))
+				{
+					tokens.add(new ESCastOperator(ESDataType.STRING));
+				}
+				else
+				{
+					//it's actually a subexpression
+					//add the subexpression
+					tokens.add(new ESExpression(subexpr));
+				}
 				
 				pointer++; //advance the pointer when we're done with the expression because we landed ON the end, not AFTER it
 			}
