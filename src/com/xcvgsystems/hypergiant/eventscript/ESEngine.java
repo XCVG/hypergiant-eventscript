@@ -139,17 +139,17 @@ public class ESEngine
 						tokens.add(new ESEqualityOperator());
 						pointer++;
 					}
-					else tokens.add(new ESAssignmentOperator("="));
+					else tokens.add(new ESAssignmentOperator());
 					
 					break;
 				case '!': //! or !=
 					pointer++;
 					if(line.charAt(pointer) == '=')
 					{
-						tokens.add(new ESInequalityOperator("!="));
+						tokens.add(new ESInequalityOperator());
 						pointer++;
 					}
-					else tokens.add(new ESNotOperator("!"));
+					else tokens.add(new ESNotOperator());
 					
 					break;
 				case '>': //> or >=
@@ -176,7 +176,7 @@ public class ESEngine
 					pointer++;
 					if(line.charAt(pointer) == '&')
 					{
-						tokens.add(new ESAndOperator("&&"));
+						tokens.add(new ESAndOperator());
 						pointer++;
 					}
 					else throw new ESUnrecognizedTokenException();
@@ -186,7 +186,7 @@ public class ESEngine
 					pointer++;
 					if(line.charAt(pointer) == '|')
 					{
-						tokens.add(new ESOrOperator("||"));
+						tokens.add(new ESOrOperator());
 						pointer++;
 					}
 					else throw new ESUnrecognizedTokenException();
