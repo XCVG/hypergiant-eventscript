@@ -85,6 +85,15 @@ public class ESVariable
 	}
 	
 	/**
+	 * Get this variable's value in an ESValue object, probably unsafe
+	 * @return this variable's value as an ESValue object
+	 */
+	public ESValue getESValue()
+	{
+		return new ESValue(this.getValue());
+	}
+	
+	/**
 	 * Set this variable's value.
 	 * @param value the new value of this variable.
 	 */
