@@ -11,8 +11,7 @@ public class ESCall extends ESToken
 
 	public ESCall(String call)
 	{
-		super();
-		// TODO Auto-generated constructor stub
+		super(call);
 	}
 	
 	//TODO lookup known functions and translate
