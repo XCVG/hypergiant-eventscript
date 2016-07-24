@@ -13,5 +13,7 @@ public abstract class ESOperator extends ESToken
 		super(symbol);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public abstract ESPrecedence getPrecedence();
 
 }
