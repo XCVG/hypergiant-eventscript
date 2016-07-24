@@ -53,9 +53,24 @@ enum ESDataType
 	 */
 	static Object castValue(Object source, ESDataType type)
 	{
-		//is this the behaviour we want?
+		//special handling for nulls; each type has a "null-like" value
+		//although we may need to add more special handling code to some operators, this should take care of many cases
 		if(source == null)
-			throw new ESCastException();
+		{
+			switch(type)
+			{
+			case BOOLEAN:
+				return new Boolean(false);
+			case INTEGER:
+				return new Integer(0);
+			case FLOAT:
+				return new Float(0f);
+			case STRING:
+				return new String();
+			default:
+				throw new ESCastException();
+			}
+		}
 		
 		ESDataType sourcetype = getTypeForObject(source);
 		
