@@ -71,5 +71,11 @@ public class ESMultiplicationOperator extends ESOperator implements ESBinaryOper
 			}
 		}
 	}
+	
+	@Override
+	public ESPrecedence getPrecedence()
+	{
+		return ESPrecedence.MULTIPLICATIVE;
+	}
 
 }

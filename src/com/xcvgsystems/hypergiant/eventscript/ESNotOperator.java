@@ -21,5 +21,11 @@ public class ESNotOperator extends ESOperator implements ESUnaryOperator
 		return new ESValue(new Boolean(!arg0cast));
 		
 	}
+	
+	@Override
+	public ESPrecedence getPrecedence()
+	{
+		return ESPrecedence.UNARY;
+	}
 
 }

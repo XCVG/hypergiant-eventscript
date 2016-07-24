@@ -80,5 +80,11 @@ public class ESDivisionAssignmentOperator extends ESOperator implements ESVariab
 			}
 		}
 	}
+	
+	@Override
+	public ESPrecedence getPrecedence()
+	{
+		return ESPrecedence.ASSIGNMENT;
+	}
 
 }

@@ -79,5 +79,11 @@ public class ESMultiplicationAssignmentOperator extends ESOperator implements ES
 			}
 		}
 	}
+	
+	@Override
+	public ESPrecedence getPrecedence()
+	{
+		return ESPrecedence.ASSIGNMENT;
+	}
 
 }

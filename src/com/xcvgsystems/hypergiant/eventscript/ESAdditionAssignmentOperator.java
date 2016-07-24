@@ -86,5 +86,11 @@ public class ESAdditionAssignmentOperator extends ESOperator implements ESVariab
 		}
 	}
 
+	@Override
+	public ESPrecedence getPrecedence()
+	{
+		return ESPrecedence.ASSIGNMENT;
+	}
+
 
 }

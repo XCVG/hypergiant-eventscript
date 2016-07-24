@@ -42,5 +42,11 @@ public class ESEqualityOperator extends ESOperator implements ESBinaryOperator
 		return new ESValue(new Boolean(Float.compare((Float)arg0value, (Float)arg1value) == 0));
 		
 	}
+	
+	@Override
+	public ESPrecedence getPrecedence()
+	{
+		return ESPrecedence.COMPARISON;
+	}
 
 }

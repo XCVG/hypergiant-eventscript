@@ -39,5 +39,11 @@ public class ESDecrementOperator extends ESOperator implements ESUnaryOperator
 		}
 		else throw new ESOperationException();
 	}
+	
+	@Override
+	public ESPrecedence getPrecedence()
+	{
+		return ESPrecedence.UNARY;
+	}
 
 }

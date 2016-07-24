@@ -21,5 +21,11 @@ public class ESAndOperator extends ESOperator implements ESBinaryOperator
 		Boolean arg1cast = (Boolean)ESDataType.castValue(arg1.getValue(), ESDataType.BOOLEAN);
 		return new ESValue(new Boolean(arg0cast && arg1cast));
 	}
+	
+	@Override
+	public ESPrecedence getPrecedence()
+	{
+		return ESPrecedence.LOGICAL;
+	}
 
 }

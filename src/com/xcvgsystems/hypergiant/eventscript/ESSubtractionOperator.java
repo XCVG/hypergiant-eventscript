@@ -71,5 +71,11 @@ public class ESSubtractionOperator extends ESOperator implements ESBinaryOperato
 			}
 		}
 	}
+	
+	@Override
+	public ESPrecedence getPrecedence()
+	{
+		return ESPrecedence.ADDITIVE;
+	}
 
 }

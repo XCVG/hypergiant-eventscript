@@ -16,5 +16,11 @@ public class ESCastOperator extends ESOperator implements ESUnaryOperator
 	{
 		return new ESValue(ESDataType.castValue(arg0.getValue(), type));
 	}
+	
+	@Override
+	public ESPrecedence getPrecedence()
+	{
+		return ESPrecedence.UNARY;
+	}
 
 }

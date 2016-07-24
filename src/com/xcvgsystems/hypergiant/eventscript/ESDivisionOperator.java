@@ -71,5 +71,11 @@ public class ESDivisionOperator extends ESOperator implements ESBinaryOperator
 			}
 		}
 	}
+	
+	@Override
+	public ESPrecedence getPrecedence()
+	{
+		return ESPrecedence.MULTIPLICATIVE;
+	}
 
 }

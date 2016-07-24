@@ -14,5 +14,11 @@ public class ESAssignmentOperator extends ESOperator implements ESVariableOperat
 		//most of this is handled in the variable class I hope
 		var.setValue(val);
 	}
+	
+	@Override
+	public ESPrecedence getPrecedence()
+	{
+		return ESPrecedence.ASSIGNMENT;
+	}
 
 }

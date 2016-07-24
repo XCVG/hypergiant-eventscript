@@ -79,5 +79,11 @@ public class ESSubtractionAssignmentOperator extends ESOperator implements ESVar
 			}
 		}
 	}
+	
+	@Override
+	public ESPrecedence getPrecedence()
+	{
+		return ESPrecedence.ASSIGNMENT;
+	}
 
 }

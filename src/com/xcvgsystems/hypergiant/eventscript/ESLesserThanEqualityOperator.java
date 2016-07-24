@@ -43,5 +43,11 @@ public class ESLesserThanEqualityOperator extends ESOperator implements ESBinary
 		//now we can compare floats!
 		return new ESValue(new Boolean(Float.compare((Float)arg0value, (Float)arg1value) <= 0));
 	}
+	
+	@Override
+	public ESPrecedence getPrecedence()
+	{
+		return ESPrecedence.COMPARISON;
+	}
 
 }

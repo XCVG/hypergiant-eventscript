@@ -79,5 +79,11 @@ public class ESModulusAssignmentOperator extends ESOperator implements ESVariabl
 			}
 		}
 	}
+	
+	@Override
+	public ESPrecedence getPrecedence()
+	{
+		return ESPrecedence.ASSIGNMENT;
+	}
 
 }

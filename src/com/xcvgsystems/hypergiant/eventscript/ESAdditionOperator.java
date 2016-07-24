@@ -79,6 +79,12 @@ public class ESAdditionOperator extends ESOperator implements ESBinaryOperator
 		//we should never get here
 		//throw new ESOperationException();
 	}
+	
+	@Override
+	public ESPrecedence getPrecedence()
+	{
+		return ESPrecedence.ADDITIVE;
+	}
 
 
 }
