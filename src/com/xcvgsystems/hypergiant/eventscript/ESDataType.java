@@ -163,7 +163,11 @@ enum ESDataType
 	 */
 	static ESDataType getTypeForObject(Object object)
 	{
-		if(object instanceof Integer)
+		if(object == null)
+		{
+			return null;
+		}
+		else if(object instanceof Integer)
 		{
 			return ESDataType.INTEGER;
 		}
