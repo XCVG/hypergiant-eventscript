@@ -1,25 +1,38 @@
 package com.xcvgsystems.hypergiant.eventscript;
 
+import java.util.List;
+
 /**
- * ESExpression class that holds a subexpression inside of an expression. Very complicated, I know.
- * Eventually this will store a tokenized and parsed list of tokens and everything will be nicely recursive.
- * But right now... placeholders.
+ * ESExpression class that holds an expression as a list of tokens.
+ * I may move the tokenizer in here or in a separate class out of ESEngine.
  * @author Chris
  *
  */
 public class ESExpression extends ESToken
 {
-	String expression;
-
-	public ESExpression(String expression)
+	List<ESToken> expression;
+	
+	public ESExpression()
 	{
-		this.expression = expression;
+		super();
+	}
+	
+	public ESExpression(List<ESToken> tokens)
+	{
+		super();
+		this.expression = tokens;
+	}
+
+	@Override
+	public String getSymbol()
+	{
+		return expression.toString();
 	}
 	
 	@Override
 	public String toString()
 	{
-		return expression;
+		return expression.toString();
 	}
 
 }

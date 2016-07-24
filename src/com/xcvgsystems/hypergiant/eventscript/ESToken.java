@@ -9,7 +9,7 @@ package com.xcvgsystems.hypergiant.eventscript;
  */
 public class ESToken
 {
-	private String symbol;
+	protected String symbol;
 
 	public ESToken()
 	{

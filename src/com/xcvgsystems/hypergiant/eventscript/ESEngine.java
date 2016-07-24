@@ -35,7 +35,7 @@ public class ESEngine
 	 * @param line The raw line of code.
 	 * @return A list of tokens representing the line of code.
 	 */
-	public List<ESToken> tokenizeLine (String line)
+	public static ESExpression tokenizeLine (String line)
 	{
 		line = line.concat(" "); //a gross hack instead of adding null checks.
 		
@@ -307,7 +307,7 @@ public class ESEngine
 				{
 					//it's actually a subexpression
 					//add the subexpression
-					tokens.add(new ESExpression(subexpr));
+					tokens.add(tokenizeLine(subexpr)); //recursion!
 				}
 				
 				pointer++; //advance the pointer when we're done with the expression because we landed ON the end, not AFTER it
@@ -321,7 +321,7 @@ public class ESEngine
 		}
 		
 		
-		return tokens;
+		return new ESExpression(tokens);
 	}
 
 }
