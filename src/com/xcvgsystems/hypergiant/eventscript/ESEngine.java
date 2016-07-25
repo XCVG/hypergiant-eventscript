@@ -19,7 +19,11 @@ public class ESEngine
 	 */
 	public static ESValue evaluateExpression(ESExpression expression)
 	{
+		List<ESToken> tokens = new LinkedList<>();
+		
 		//copy expression to working list and execute subexpressions recursively
+		List<ESToken> origtokens = expression.getList();
+		
 		
 		//then do everything else in order of operations
 		

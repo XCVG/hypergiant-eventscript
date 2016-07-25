@@ -22,6 +22,11 @@ public class ESExpression extends ESToken
 		super();
 		this.expression = tokens;
 	}
+	
+	public List<ESToken> getList()
+	{
+		return expression;
+	}
 
 	@Override
 	public String getSymbol()
