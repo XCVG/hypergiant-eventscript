@@ -12,19 +12,16 @@ public class ESEngine
 {
 	
 	/**
-	 * Evaluates a single line of EventScript code and returns the value.
+	 * Evaluates a single chunk of EventScript code and returns the value.
 	 *   
-	 * @param line The raw line of code.
-	 * @return A return value object with the result of the evaluation.
+	 * @param expression The expression to be evaluated.
+	 * @return An ESValue object with the result of the evaluation.
 	 */
-	public ESReturnValue evalLine(String line)
+	public static ESValue evaluateExpression(ESExpression expression)
 	{
-		//break string into pieces
+		//copy expression to working list and execute subexpressions recursively
 		
-		//tokenize string list
-		
-		//execute code
-		//blocks, calls, div/mul, add/sub
+		//then do everything else in order of operations
 		
 		return null;
 	}
