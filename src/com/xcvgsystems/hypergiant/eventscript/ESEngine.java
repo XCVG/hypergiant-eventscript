@@ -23,11 +23,33 @@ public class ESEngine
 		
 		//copy expression to working list and execute subexpressions recursively
 		List<ESToken> origtokens = expression.getList();
+		for(ESToken token : origtokens)
+		{
+			ESToken newtoken;
+			if(token instanceof ESExpression)
+			{
+				newtoken = evaluateExpression((ESExpression)token); //recursion!
+			}
+			else
+			{
+				//I think it's safe to just copy references because tokens are immutable
+				newtoken = token;
+			}
+			tokens.add(newtoken);
+		}
 		
+		//next, do calls
+		//although we need to figure out how to handle multiple arguments with tokens, but that'll come later
+		//so for now, only pretend to do calls
 		
 		//then do everything else in order of operations
+		//and we have to deal with concurrent operations... fun
 		
-		return null;
+		//at the end we should have one or zero tokens of type ESValue or ESVariableToken
+		if(tokens.size() > 1)
+			throw new ESEvaluationException();
+		
+		return (ESValue)(tokens.size() > 0 ? tokens.get(0) : null);
 	}
 	
 	/**
