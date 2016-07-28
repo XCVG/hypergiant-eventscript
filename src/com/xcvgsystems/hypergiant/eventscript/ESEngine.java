@@ -63,6 +63,29 @@ public class ESEngine
 					}
 					else if(currToken instanceof ESBinaryOperator)
 					{
+						//step back
+						i--;
+						
+						//get first operand
+						ESToken op1token = tokens.remove(i);
+						
+						//get operator
+						ESBinaryOperator operator = (ESBinaryOperator)tokens.remove(i);
+						
+						//get second operand
+						ESToken op2token = tokens.remove(i);
+								
+						//TODO handle variables
+						ESValue op1value = (ESValue)op1token;
+						ESValue op2value = (ESValue)op2token;
+						
+						//TODO debug output
+						
+						//evaluate
+						ESValue result = operator.operate(op1value, op2value);
+						
+						//insert
+						tokens.add(i, result);
 						
 					}
 					else if(currToken instanceof ESVariableOperator)
@@ -70,6 +93,8 @@ public class ESEngine
 						
 					}
 					else throw new ESEvaluationException();
+					
+					System.err.println(tokens.toString() + " " + i);
 				}
 			}
 		}
