@@ -44,6 +44,35 @@ public class ESEngine
 		
 		//then do everything else in order of operations
 		//and we have to deal with concurrent operations... fun
+		for(ESPrecedence p : ESPrecedence.values()) //go through in order of precedence
+		{
+			System.err.println(p.name());
+			for(int i = 0; i < tokens.size(); i++)
+			{
+				ESToken currToken = tokens.get(i);
+				System.err.println(currToken.toString());
+				if(currToken instanceof ESOperator && ((ESOperator)(currToken)).getPrecedence() == p)
+				{
+					// token is an operator and matches the precedence we're searching for
+					System.err.println(currToken.getSymbol());
+					
+					//separate paths for unary, binary, and assignment operators
+					if(currToken instanceof ESUnaryOperator)
+					{
+						
+					}
+					else if(currToken instanceof ESBinaryOperator)
+					{
+						
+					}
+					else if(currToken instanceof ESVariableOperator)
+					{
+						
+					}
+					else throw new ESEvaluationException();
+				}
+			}
+		}
 		
 		//at the end we should have one or zero tokens of type ESValue or ESVariableToken
 		if(tokens.size() > 1)
