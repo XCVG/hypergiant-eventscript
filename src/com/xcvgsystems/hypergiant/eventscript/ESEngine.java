@@ -59,6 +59,27 @@ public class ESEngine
 					//separate paths for unary, binary, and assignment operators
 					if(currToken instanceof ESUnaryOperator)
 					{
+						//we'll need this later
+						ESValue result = null;
+						
+						//remove the token
+						ESUnaryOperator operator = (ESUnaryOperator)tokens.remove(i);
+						
+						//next one should be a variable or a value
+						ESToken op0token = tokens.remove(i);
+						if(op0token instanceof ESVariableToken)
+						{
+							//TODO if it's a variable, get the value and operate
+						}
+						else if(op0token instanceof ESValue)
+						{
+							//otherwise just operate
+							result = operator.operate((ESValue)op0token);
+						}
+						else throw new ESEvaluationException();
+						
+						//insert
+						tokens.add(i, result);
 						
 					}
 					else if(currToken instanceof ESBinaryOperator)
