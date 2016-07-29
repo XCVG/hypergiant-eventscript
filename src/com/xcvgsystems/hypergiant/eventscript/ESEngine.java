@@ -17,7 +17,7 @@ public class ESEngine
 	 * @param expression The expression to be evaluated.
 	 * @return An ESValue object with the result of the evaluation.
 	 */
-	public static ESValue evaluateExpression(ESExpression expression)
+	public static ESValue evaluateExpression(ESExpression expression) //we'll need to eventually pass context here or make it part of context
 	{
 		List<ESToken> tokens = new LinkedList<>();
 		
@@ -111,11 +111,11 @@ public class ESEngine
 					}
 					else if(currToken instanceof ESVariableOperator)
 					{
-						
+						//TODO can't do this without context
 					}
 					else if(currToken instanceof ESUnaryVariableOperator)
 					{
-						
+						//TODO can't do this without context
 					}
 					else throw new ESEvaluationException();
 					

@@ -11,6 +11,9 @@ public class ESDriver
 		ESEngine engine = new ESEngine();
 		System.out.println(engine.tokenizeLine("$variable++"));
 		System.out.println(engine.tokenizeLine("6 + 4 * 2"));
+		System.out.println(ESEngine.evaluateExpression(ESEngine.tokenizeLine("6 + 4 * 2")));
+		System.out.println(engine.tokenizeLine("(6 + 4) * 2"));
+		System.out.println(ESEngine.evaluateExpression(ESEngine.tokenizeLine("(6 + 4) * 2")));
 		System.out.println(engine.tokenizeLine("++5"));
 		System.out.println(engine.tokenizeLine("5++"));
 		System.out.println(engine.tokenizeLine("56.27283 + 177772823 - 1 % 3"));
