@@ -1,6 +1,6 @@
 package com.xcvgsystems.hypergiant.eventscript;
 
-public class ESIncrementOperator extends ESOperator implements ESUnaryOperator
+public class ESIncrementOperator extends ESOperator implements ESUnaryVariableOperator
 {
 
 	public ESIncrementOperator()
@@ -10,7 +10,7 @@ public class ESIncrementOperator extends ESOperator implements ESUnaryOperator
 	}
 
 	@Override
-	public ESValue operate(ESValue arg0)
+	public void operate(ESVariable arg0)
 	{
 		if(arg0.getType() == ESDataType.BOOLEAN)
 		{
@@ -18,11 +18,11 @@ public class ESIncrementOperator extends ESOperator implements ESUnaryOperator
 		}
 		else if(arg0.getType() == ESDataType.FLOAT)
 		{
-			return new ESValue(new Float(((Float)arg0.getValue()).floatValue() + 1.0)); //whoa			
+			arg0.setValue(new Float(((Float)arg0.getValue()).floatValue() + 1.0)); //whoa			
 		}
 		else if(arg0.getType() == ESDataType.INTEGER)
 		{
-			return new ESValue(new Integer(((Integer)arg0.getValue()).intValue() + 1));
+			arg0.setValue(new Integer(((Integer)arg0.getValue()).intValue() + 1));
 		}
 		else if(arg0.getType() == ESDataType.STRING)
 		{
@@ -30,12 +30,12 @@ public class ESIncrementOperator extends ESOperator implements ESUnaryOperator
 			if(argstr.contains("."))
 			{
 				Float flt = (Float)ESDataType.castValue(argstr, ESDataType.FLOAT);
-				return new ESValue(new Float(flt+1.0));
+				arg0.setValue(new Float(flt+1.0));
 			}
 			else
 			{
 				Integer it = (Integer)ESDataType.castValue(argstr, ESDataType.INTEGER);
-				return new ESValue(new Integer(++it));
+				arg0.setValue(new Integer(++it));
 			}
 		}
 		else throw new ESOperationException();

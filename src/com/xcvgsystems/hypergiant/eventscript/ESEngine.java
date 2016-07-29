@@ -92,6 +92,10 @@ public class ESEngine
 					{
 						
 					}
+					else if(currToken instanceof ESUnaryVariableOperator)
+					{
+						
+					}
 					else throw new ESEvaluationException();
 					
 					System.err.println(tokens.toString() + " " + i);
